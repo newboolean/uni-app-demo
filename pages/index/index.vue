@@ -1,8 +1,16 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+	<view class="home">
+		<scroll-view scroll-x class="navscroll">
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+			<view class="item">国内</view>
+		</scroll-view>
+		<view class="content">
+			没一行的内容
 		</view>
 	</view>
 </template>
@@ -22,31 +30,25 @@
 		}
 	}
 </script>
-
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+<style lang="scss" scoped>
+	.navscroll {
+		height: 100rpx;
+		background: #F7F8FA;
+		white-space: nowrap;
+		/deep/ ::-webkit-scrollbar {
+			width: 4px !important;
+			height: 1px !important;
+			overflow: auto !important;
+			background: transparent !important;
+			-webkit-appearance: auto !important;
+			display: block;
+		}
+		.item {
+			display: inline-block;
+			font-size: 40rpx;
+			line-height: 100rpx;
+			padding: 0 40rpx;
+			color: #333;
+		}
 	}
 </style>
