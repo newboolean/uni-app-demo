@@ -10,7 +10,9 @@
 			<view class="item">国内</view>
 		</scroll-view>
 		<view class="content">
-			没一行的内容
+			<view class="item" v-for="item in 10">
+				<newItem></newItem>
+			</view>
 		</view>
 	</view>
 </template>
@@ -35,6 +37,10 @@
 		height: 100rpx;
 		background: #F7F8FA;
 		white-space: nowrap;
+		position: fixed;
+		top: var(--window-top);
+		left: 0rpx;
+		z-index: 10;
 		/deep/ ::-webkit-scrollbar {
 			width: 4px !important;
 			height: 1px !important;
@@ -49,6 +55,15 @@
 			line-height: 100rpx;
 			padding: 0 40rpx;
 			color: #333;
+		}
+	}
+	.content {
+		padding: 30rpx;
+		padding-top: 130rpx;
+		.item {
+			border: 1px dashed #efefef;
+			padding: 20rpx 0;
+			
 		}
 	}
 </style>
