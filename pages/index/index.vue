@@ -1,17 +1,19 @@
 <template>
 	<view class="home">
 		<scroll-view scroll-x class="navscroll">
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
+			<view
+				class="item"
+				v-for="(item,index) in navList"
+				:key="item.id"
+				:class="index === navIndex ? 'active' : ''"
+				@click="changeNav(index)"
+			>
+				{{ item.classname }}
+			</view>
 		</scroll-view>
 		<view class="content">
-			<view class="item" v-for="item in 10">
-				<newItem></newItem>
+			<view class="item" v-for="item in newList" :key="item.id">
+				<newItem :item="item"></newItem>
 			</view>
 		</view>
 	</view>
@@ -21,14 +23,39 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				navList: [],
+				newList: [],
+				navIndex: 0
 			}
 		},
 		onLoad() {
-
+			this.getNavData()
+			this.getNewList()
 		},
 		methods: {
-
+			changeNav(index) {
+				this.navIndex = index
+			},
+			getNavData() {
+				uni.request({
+					url:'https://ku.qingnian8.com/dataApi/news/navlist.php',
+					success: res => {
+						console.log(res,'123')
+						this.navList = res.data
+					}
+				})
+			},
+			getNewList() {
+				uni.request({
+					url:'https://ku.qingnian8.com/dataApi/news/newslist.php',
+					data: {
+						cid: '50'
+					},
+					success: res =>{
+						this.newList = res.data
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -55,6 +82,9 @@
 			line-height: 100rpx;
 			padding: 0 40rpx;
 			color: #333;
+		}
+		.active {
+			color:  #1296db;
 		}
 	}
 	.content {

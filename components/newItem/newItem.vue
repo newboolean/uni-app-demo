@@ -1,13 +1,14 @@
 <template>
-	<view class="item-box">
+	<view class="item-box" @click="goDetail">
 		<view class="pic">
 			<image :src="item.picurl" mode="aspectFill"></image>
 		</view>
 		<view class="text">
 			<view class="title">{{ item.title }}</view>
 			<view class="content">
-				<text>{{ item.author }}</text>
-				<text>{{ item.hits }}浏览</text>
+				<text v-if="from === 'user'">{{ item.looktime }}</text>
+				<text v-if="from === 'index'">{{ item.author }}</text>
+				<text v-if="from === 'index'">{{ item.hits }}浏览</text>
 			</view>
 		</view>
 	</view>
@@ -28,12 +29,23 @@
 						looktime: "2023-12-21 12:05:20"
 					}
 				}
+			},
+			from: {
+				type: String,
+				default: 'index'
 			}
 		},
 		data() {
 			return {
 				
 			};
+		},
+		methods: {
+			goDetail() {
+				uni.navigateTo({
+					url:'/pages/detail/detail' 
+				})
+			}
 		}
 	}
 </script>
@@ -71,6 +83,7 @@
 				color: #999;
 				display: flex;
 				justify-content: space-between;
+				padding-right: 20rpx;
 			}
 		}
 	}

@@ -13,6 +13,14 @@
 				"navigationBarTitleText" : "个人中心",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/detail/detail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "新闻详情",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

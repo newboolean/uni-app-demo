@@ -8,7 +8,7 @@
 		</view>
 		<view class="content">
 			<view class="item">
-				<newItem></newItem>
+				<newItem from="user"></newItem>
 			</view>
 		</view>
 	</view>
