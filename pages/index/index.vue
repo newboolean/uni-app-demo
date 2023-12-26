@@ -6,7 +6,7 @@
 				v-for="(item,index) in navList"
 				:key="item.id"
 				:class="index === navIndex ? 'active' : ''"
-				@click="changeNav(index)"
+				@click="changeNav(index,item.id)"
 			>
 				{{ item.classname }}
 			</view>
@@ -15,6 +15,9 @@
 			<view class="item" v-for="item in newList" :key="item.id">
 				<newItem :item="item"></newItem>
 			</view>
+		</view>
+		<view class="no-data" v-if="newList.length === 0">
+			<image src="../../static/images/noData.png" mode="aspectFill"></image>
 		</view>
 	</view>
 </template>
@@ -25,16 +28,27 @@
 			return {
 				navList: [],
 				newList: [],
-				navIndex: 0
+				navIndex: 0,
+				currentNav: '',
+				currentPage: 1
 			}
 		},
 		onLoad() {
 			this.getNavData()
 			this.getNewList()
 		},
+		onReachBottom() {
+			console.log(123123)
+			this.currentPage++
+			this.getNewList()
+		},
 		methods: {
-			changeNav(index) {
+			changeNav(index,id) {
 				this.navIndex = index
+				this.currentNav = id
+				this.currentPage = 1
+				this.newList = []
+				this.getNewList()
 			},
 			getNavData() {
 				uni.request({
@@ -49,10 +63,11 @@
 				uni.request({
 					url:'https://ku.qingnian8.com/dataApi/news/newslist.php',
 					data: {
-						cid: '50'
+						cid: this.currentNav,
+						page: this.currentPage
 					},
 					success: res =>{
-						this.newList = res.data
+						this.newList = [...this.newList,...res.data]
 					}
 				})
 			}
@@ -94,6 +109,16 @@
 			border: 1px dashed #efefef;
 			padding: 20rpx 0;
 			
+		}
+	}
+	.no-data {
+		margin-top: 40rpx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		image {
+			width: 350rpx;
+			height: 300rpx;
 		}
 	}
 </style>
