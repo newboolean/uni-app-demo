@@ -1,5 +1,5 @@
 <template>
-	<view class="item-box" @click="goDetail">
+	<view class="item-box">
 		<view class="pic">
 			<image :src="item.picurl" mode="aspectFill"></image>
 		</view>
@@ -41,11 +41,6 @@
 			};
 		},
 		methods: {
-			goDetail() {
-				uni.navigateTo({
-					url:'/pages/detail/detail' 
-				})
-			}
 		}
 	}
 </script>

@@ -13,11 +13,16 @@
 		</scroll-view>
 		<view class="content">
 			<view class="item" v-for="item in newList" :key="item.id">
-				<newItem :item="item"></newItem>
+				<newItem :item="item" @click.native="goDetail(item)"></newItem>
 			</view>
 		</view>
 		<view class="no-data" v-if="newList.length === 0">
 			<image src="../../static/images/noData.png" mode="aspectFill"></image>
+		</view>
+		<view class="loading" v-if="newList.length > 0">
+			<view></view>
+			<view v-if="loading === 1">数据加载中</view>
+			<view v-if="loading === 2">没有更多数据了</view>
 		</view>
 	</view>
 </template>
@@ -30,7 +35,8 @@
 				newList: [],
 				navIndex: 0,
 				currentNav: '',
-				currentPage: 1
+				currentPage: 1,
+				loading: 0 // 0默认 1加载中 2没有更多
 			}
 		},
 		onLoad() {
@@ -39,14 +45,25 @@
 		},
 		onReachBottom() {
 			console.log(123123)
-			this.currentPage++
-			this.getNewList()
+			if(this.loading !== 2) {
+				this.currentPage++
+				this.loading = 1
+				this.getNewList()
+			}
 		},
 		methods: {
+			// 调整详情页
+			goDetail(item) {
+				console.log(item)
+				uni.navigateTo({
+					url:`/pages/detail/detail?cid=${item.classid}&id=${item.id}` 
+				})
+			},
 			changeNav(index,id) {
 				this.navIndex = index
 				this.currentNav = id
 				this.currentPage = 1
+				this.loading = 0
 				this.newList = []
 				this.getNewList()
 			},
@@ -67,6 +84,9 @@
 						page: this.currentPage
 					},
 					success: res =>{
+						if(res.data.length === 0) {
+							this.loading = 2
+						}
 						this.newList = [...this.newList,...res.data]
 					}
 				})
@@ -119,6 +139,14 @@
 		image {
 			width: 350rpx;
 			height: 300rpx;
+		}
+	}
+	.loading {
+		text-align: center;
+		font-size: 26rpx;
+		color: #888;
+		view {
+			line-height: 2rem;
 		}
 	}
 </style>
