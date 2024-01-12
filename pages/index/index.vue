@@ -44,7 +44,6 @@
 			this.getNewList()
 		},
 		onReachBottom() {
-			console.log(123123)
 			if(this.loading !== 2) {
 				this.currentPage++
 				this.loading = 1
@@ -54,7 +53,6 @@
 		methods: {
 			// 调整详情页
 			goDetail(item) {
-				console.log(item)
 				uni.navigateTo({
 					url:`/pages/detail/detail?cid=${item.classid}&id=${item.id}` 
 				})
@@ -71,7 +69,6 @@
 				uni.request({
 					url:'https://ku.qingnian8.com/dataApi/news/navlist.php',
 					success: res => {
-						console.log(res,'123')
 						this.navList = res.data
 					}
 				})
