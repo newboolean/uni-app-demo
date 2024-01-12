@@ -4,6 +4,5 @@
     1. clone项目到本地
     2. 使用HBuilder本地运行
 ### 项目预览
-    https://github.com/newboolean/uni-app-demo/assets/49263295/e9caac87-3756-4e70-a737-1300ba06e36f
-    https://github.com/newboolean/uni-app-demo/assets/49263295/3d65a6a3-d8c1-401d-b38c-a90426c22cee
-
+    ![image](https://github.com/newboolean/uni-app-demo/assets/49263295/c0d56d5c-30ee-400a-aadf-0a7e9bed5f55)
+    ![image](https://github.com/newboolean/uni-app-demo/assets/49263295/840ddb6c-58fc-44cb-aee2-25537d67c548)
